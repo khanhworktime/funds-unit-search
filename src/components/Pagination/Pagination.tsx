@@ -23,22 +23,43 @@ export function Pagination({ size, currentPage, setPage }: PaginationProps) {
         <PageNumberButtonWrapper
           key={`PaginationItem${i}`}
           onClick={() => setPage(i)}
+          className={currentPage === i ? "active" : undefined}
         >
           {i}
         </PageNumberButtonWrapper>,
       );
     }
     return els;
-  }, [size]);
+  }, [currentPage, setPage, size]);
 
   return (
     <PaginationWrapper>
-      <PaginationControllerWrapper>
-        <CaretLeft color={"#FFF"} />
+      <PaginationControllerWrapper
+        style={
+          currentPage === 1
+            ? { mixBlendMode: "luminosity", opacity: 0.3 }
+            : undefined
+        }
+        disabled={currentPage === 1}
+        onClick={() => {
+          setPage(currentPage - 1);
+        }}
+      >
+        <CaretLeft color={"#000"} />
       </PaginationControllerWrapper>
       <PageNumberWrapper>{PageNumbers}</PageNumberWrapper>
-      <PaginationControllerWrapper>
-        <CaretRight color={"#FFF"} />
+      <PaginationControllerWrapper
+        style={
+          currentPage === size
+            ? { mixBlendMode: "luminosity", opacity: 0.3 }
+            : undefined
+        }
+        disabled={currentPage === size}
+        onClick={() => {
+          setPage(currentPage + 1);
+        }}
+      >
+        <CaretRight color={"#000"} />
       </PaginationControllerWrapper>
     </PaginationWrapper>
   );
