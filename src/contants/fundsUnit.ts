@@ -15,4 +15,4 @@ export const conservationFund: FundUnit = {
   name: "conservation",
 };
 
-export const fundsUnitList = [growthFund, balanceFund, conservationFund];
+export const baseFundsUnitList = [growthFund, balanceFund, conservationFund];

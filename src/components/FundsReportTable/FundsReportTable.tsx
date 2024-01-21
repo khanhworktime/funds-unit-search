@@ -1,41 +1,39 @@
-import { Table } from "@/components/Table";
-import { Data } from "@/models";
-import { useMemo, useState } from "react";
+"use client";
+import { DataTable } from "../DataTable";
+import { useContext, useMemo, useState } from "react";
 import { DataTableReportRecord, transformDataToTableReport } from "@/utils";
 import {
   FundsReportTableWrapper,
   TablePaginationWrapper,
 } from "@/components/FundsReportTable/fundsReportTable.style";
 import { Pagination } from "@/components/Pagination";
+import { FundListFilterContext } from "@/Context";
+import { DataContext } from "@/Context/data.context";
 
-interface FundsReportTableProps {
-  data: Data[];
-}
+export function FundsReportTable() {
+  // Get fundList
+  const fundList = useContext(FundListFilterContext);
 
-const fundsReportTableColumns = [
-  {
-    label: "Ngày",
-    key: "date",
-  },
-  {
-    label: "Quỹ Tăng trưởng",
-    key: "growth",
-  },
-  {
-    label: "Quỹ Cân bằng",
-    key: "balance",
-  },
-  {
-    label: "Quỹ Bảo toàn",
-    key: "conservation",
-  },
-];
+  //Get data
+  const data = useContext(DataContext);
 
-export function FundsReportTable({ data }: FundsReportTableProps) {
-  // Transform Data to Table report record
+  // Transform Data to DataTable report record
   const transformedData = useMemo(
-    () => transformDataToTableReport(data),
-    [data],
+    () => transformDataToTableReport(data, fundList),
+    [data, fundList],
+  );
+
+  // Column defined
+
+  const fundsReportTableColumns = useMemo(
+    () => [
+      {
+        label: "Ngày",
+        key: "date",
+      },
+      ...fundList.map((f) => ({ label: f.label, key: f.name })),
+    ],
+    [fundList],
   );
 
   // Pagination
@@ -49,7 +47,7 @@ export function FundsReportTable({ data }: FundsReportTableProps) {
 
   return (
     <FundsReportTableWrapper>
-      <Table<DataTableReportRecord>
+      <DataTable<DataTableReportRecord>
         name={"fundReportTable"}
         data={currentPageData}
         columnsHeader={fundsReportTableColumns}

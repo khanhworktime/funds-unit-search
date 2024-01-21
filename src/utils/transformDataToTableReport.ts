@@ -1,6 +1,9 @@
 import { Data } from "@/models";
+import { FundUnit } from "@/models/fundUnit.model";
 
 export interface DataTableReportRecord {
+  [key: string]: string | undefined;
+
   date: string;
   growth?: string;
   balance?: string;
@@ -9,6 +12,7 @@ export interface DataTableReportRecord {
 
 export function transformDataToTableReport(
   data: Data[],
+  fundList: FundUnit[],
 ): DataTableReportRecord[] {
   return data.map((item) => {
     let record: DataTableReportRecord = {
@@ -17,16 +21,14 @@ export function transformDataToTableReport(
         day: "2-digit",
         year: "numeric",
       }),
-      growth: item.records
-        .find((fund) => fund.fundUnit.name === "growth")
-        ?.value?.toFixed(2),
-      balance: item.records
-        .find((fund) => fund.fundUnit.name === "balance")
-        ?.value?.toFixed(2),
-      conservation: item.records
-        .find((fund) => fund.fundUnit.name === "conservation")
-        ?.value?.toFixed(2),
     };
+
+    // Mapping due to fundList filter
+    fundList.forEach((f) => {
+      record[f.name] = item.records
+        .find((fund) => fund.fundUnit.name === f.name)
+        ?.value?.toFixed(2);
+    });
     return record;
   });
 }

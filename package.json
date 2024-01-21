@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iroomit/react-date-range": "^3.0.0",
+    "@types/react-date-range": "^1.4.9",
     "chart.js": "^4.4.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
+    "date-fns": "^3.3.0",
     "next": "14.0.4",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "styled-components": "^6.1.8"
   },

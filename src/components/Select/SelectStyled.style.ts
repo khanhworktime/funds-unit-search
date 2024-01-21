@@ -26,10 +26,6 @@ export const OptionStyle = styled.option`
   width: 100%;
 `;
 
-export const DefaultOptionStyled = styled(OptionStyle)`
-  display: none;
-`;
-
 export const CaretImageContainer = styled.div`
   position: absolute;
   top: 10px;

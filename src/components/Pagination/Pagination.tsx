@@ -15,7 +15,6 @@ interface PaginationProps {
 }
 
 export function Pagination({ size, currentPage, setPage }: PaginationProps) {
-  console.log(currentPage);
   const PageNumbers = useMemo<ReactElement[]>(() => {
     const els = [];
     for (let i = 1; i <= size; i++) {

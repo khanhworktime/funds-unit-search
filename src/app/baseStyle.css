@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    padding: 0;
+    padding: 116px;
     font-size: 1rem;
 }
 
@@ -11,4 +11,27 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+h1.homeHeading {
+    color: #E87722;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+p.description {
+    max-width: 1000px;
+    text-align: center;
+    margin: 0;
+    font-size: 1.125rem;
 }

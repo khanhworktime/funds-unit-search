@@ -35,6 +35,16 @@ export const TableCellStyled = styled.td`
   tr:last-child > & {
     border-bottom: none;
   }
+
+  &.hasHeaderColumn {
+    background-color: ${(props) => props.theme.table.secondary};
+    color: ${(props) => props.theme.primary};
+    font-weight: bold;
+  }
+
+  &.cellTextEmphasis {
+    color: ${(props) => props.theme.primary};
+  }
 `;
 
 export const TableStyled = styled.table`

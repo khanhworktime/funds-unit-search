@@ -2,7 +2,6 @@
 import { forwardRef, SelectHTMLAttributes } from "react";
 import {
   CaretImageContainer,
-  DefaultOptionStyled,
   OptionStyle,
   SelectStyled,
   Wrapper,
@@ -24,10 +23,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ options, placeholder, ...props }, ref) => {
     return (
       <Wrapper>
-        <SelectStyled defaultValue={""} ref={ref} {...props}>
-          <DefaultOptionStyled value={""} disabled={true}>
-            {placeholder}
-          </DefaultOptionStyled>
+        <SelectStyled {...props} defaultValue={"all"} ref={ref}>
+          {props.defaultValue === undefined && (
+            <OptionStyle value={"all"}>{placeholder}</OptionStyle>
+          )}
           {(options ?? []).map((opt: SelectOption) => (
             <OptionStyle value={opt.value} key={opt.value}>
               {opt.label}
